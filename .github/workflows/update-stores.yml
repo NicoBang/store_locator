@@ -1,0 +1,46 @@
+# .github/workflows/update-stores.yml
+name: Update Store Locator Data
+
+on:
+  schedule:
+    # Kører hver nat kl. 02:00 dansk tid (UTC+1)
+    - cron: '0 1 * * *'
+  
+  # Tillad manuel kørsel fra GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  update-stores:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run store updater
+        env:
+          SHOPIFY_ACCESS_TOKEN: ${{ secrets.SHOPIFY_ACCESS_TOKEN }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          # Eller brug Service Account:
+          # GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+        run: node shopify-store-updater.js
+      
+      - name: Send success notification (optional)
+        if: success()
+        run: |
+          echo "✅ Store data successfully updated at $(date)"
+          # Her kan du tilføje Slack/email notification
+      
+      - name: Send failure notification (optional)  
+        if: failure()
+        run: |
+          echo "❌ Store update failed at $(date)"
+          # Her kan du tilføje Slack/email notification
