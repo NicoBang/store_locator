@@ -1,0 +1,16 @@
+{
+  "lastUpdated": "2025-09-21T12:48:21.627Z",
+  "storeCount": 755,
+  "fileSize": {
+    "json": 185172,
+    "jsonMin": 139871,
+    "csv": 57805
+  },
+  "cdn": {
+    "json": "https://cdn.jsdelivr.net/gh/NicoBang/store_locator@main/stores.json",
+    "jsonMin": "https://cdn.jsdelivr.net/gh/NicoBang/store_locator@main/stores.min.json",
+    "csv": "https://cdn.jsdelivr.net/gh/NicoBang/store_locator@main/stores.csv",
+    "purgeJson": "https://purge.jsdelivr.net/gh/NicoBang/store_locator@main/stores.min.json",
+    "purgeCsv": "https://purge.jsdelivr.net/gh/NicoBang/store_locator@main/stores.csv"
+  }
+}
